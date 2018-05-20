@@ -1,0 +1,22 @@
+{
+  "name": "word_guess",
+  "version": "1.0.0",
+  "description": "Command Line Word Guess Game",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tastaub/word_guess.git"
+  },
+  "author": "Thomas Staub",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tastaub/word_guess/issues"
+  },
+  "homepage": "https://github.com/tastaub/word_guess#readme",
+  "dependencies": {
+    "inquirer": "^5.2.0"
+  }
+}

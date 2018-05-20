@@ -28,5 +28,4 @@ Word.prototype.showWord = function()  {
     }
 }
 
-var sampson = new Word("sampson");
-sampson.newLetters();
+module.exports = Word;
