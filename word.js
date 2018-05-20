@@ -3,6 +3,7 @@ var Letter = require("./letter.js");
 var Word = function(chosenWord) {
     this.chosenWord = chosenWord;
     this.letterArr = [];
+    this.correct = 0;
     this.breakWord = function()  {
         return this.chosenWord.split("");
 
@@ -22,9 +23,8 @@ var Word = function(chosenWord) {
 
 Word.prototype.showWord = function()  {
     for(var i=0; i < this.letterArr.length; i++)  {
-            var display = this.letterArr[i].letterSwitch();
-        
-        console.log(display);
+        var display = this.letterArr[i].letterSwitch();
+        console.log(display)
     }
 }
 

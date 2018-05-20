@@ -8,8 +8,10 @@ function Letter(letter)  {
 Letter.prototype.letterSwitch = function()  {
     if(this.guess === true)  {
        return this.letter;
+       console.log(this.letter)
     }  else  {
        return "-";
+       console.log("-")
     }
 }
 
