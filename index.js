@@ -5,8 +5,15 @@ var isLetter = require("is-letter");
 var selectWord = "";
 var newWord = "";
 
+var wordArr = "";
+var wordBanks = {
+    first: ["hello", "goodbye", "sleepy", "grumpy", "beef", "taco", "dorito"],
+    second: ["spanish", "italian", "french", "german", "russian", "english", "latin"],
+    third: ["cold", "hot", "rain", "tornado", "hurricane", "cyclone", "flood", "snow"]
+}
 
-var wordBank = ["hello", "goodbye", "sleepy", "grumpy", "beef", "taco", "dorito"];
+
+
 var guessLetters = [];
 
 
@@ -14,18 +21,37 @@ var guessesLeft = 10;
 
 
 function renderGame()  {
-    guessesLeft = 10;
-    guessLetters = [];
-    selectWord = wordBank[Math.floor(Math.random() * wordBank.length)];
-    newWord = new Word(selectWord);
-    console.log(color.red`
----------------------------------------       
-        Guess the things!!!!
----------------------------------------
-    `);
-    newWord.newLetters();
-    newWord.wordRender();
-    gameAsk();
+    
+    topicSelect();
+    console.log(topicSelect());
+    
+    // guessesLeft = 10;
+    // guessLetters = [];
+    // var key = wordBanks.wordBank
+    // selectWord = key[Math.floor(Math.random() * key.length)];
+    // newWord = new Word(selectWord);
+    // console.log(newWord);
+    // console.log(color.blue(`     
+    //     IT'S SOMETHING!!!!`));
+    // newWord.newLetters();
+    // newWord.wordRender();
+    // gameAsk();
+}
+
+function topicSelect()  {
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "size",
+            message: "Pick something",
+            choices: ["first", "second", "third"],
+            filter: function(val)  {
+                return val.toLowerCase();
+            }
+        }
+    ]).then(function(answer)  {
+        return answer.size;
+    })
 }
 
 function playAgain()  {
@@ -37,10 +63,15 @@ function playAgain()  {
         }
     ]).then(function(result)  {
         if(result.playAgain === false)  {
-            console.log(`
-            Goodbye
-        Thanks for playing
-        `);
+            console.log(color.rainbow(`
+            ★─▄█▀▀║░▄█▀▄║▄█▀▄║██▀▄║─★
+            ★─██║▀█║██║█║██║█║██║█║─★
+            ★─▀███▀║▀██▀║▀██▀║███▀║─★
+            ★───────────────────────★
+            ★───▐█▀▄─ ▀▄─▄▀ █▀▀──█───★
+            ★───▐█▀▀▄ ──█── █▀▀──▀───★
+            ★───▐█▄▄▀ ──▀── ▀▀▀──▄───★
+        `));
         return;
         }
         renderGame();
@@ -79,25 +110,25 @@ function gameAsk()  {
                     guessLetters.push(input);
                     var found = newWord.checkGuess(input)
                     if(found === 0)  {
-                        console.log(`
+                        console.log(color.red(`
             YOUR GUESS WAS INCORRECT
-                        `);
+                        `));
                         newWord.wordRender();
                         guessesLeft--;
                     }  else  {
-                        console.log(`
+                        console.log(color.green(`
             YOUR GUESS WAS CORRECT
-                        `)
+                        `))
                         newWord.wordRender();
                         newWord.checkComplete();
                     } 
                     gameAsk();  
                 } else  {
-                    console.log(`
+                    console.log(color.red(`
                     
             YOU ALREADY GUESSED THAT LETTER
                     
-                    `)
+                    `))
                     gameAsk();
                 }
 
@@ -107,17 +138,17 @@ function gameAsk()  {
             
         } 
         else if(guessesLeft === 0)  {
-            console.log(`
+            console.log(color.red(`
         You Lost :(
         The word was: ${newWord.chosenWord.toUpperCase()}
-        `)
+        `))
         playAgain();
         }  
-        else  if(newWord.complete === true) {
-            console.log(`
+        else if(newWord.complete === true) {
+            console.log(color.green(`
         Congrats!!!! :)
         You guessed the word: ${newWord.chosenWord.toUpperCase()}
-            `)
+            `))
         playAgain();
         }
     }
@@ -133,5 +164,5 @@ function gameAsk()  {
 
 
    
-
-renderGame();
+topicSelect();
+// renderGame();
