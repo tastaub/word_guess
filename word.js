@@ -1,5 +1,4 @@
 var Letter = require("./letter.js");
-var guess = process.argv[2];
 var Word = function(chosenWord) {
     this.chosenWord = chosenWord;
     this.letterArr = [];
@@ -14,7 +13,11 @@ var Word = function(chosenWord) {
         for(var i = 0; i < this.letterArr.length; i++)  {
             display += this.letterArr[i].letRender();
         }
-        console.log(display)
+        console.log(`
+--------------------------------------
+        ${display.toUpperCase()}
+--------------------------------------
+        `)
     }
     this.checkGuess = function(ltr)  {
         this.correct = 0
@@ -42,40 +45,5 @@ var Word = function(chosenWord) {
 };
 
                
-                
-
-
-
-
-
-
-
-// Word.prototype.checkWord = function(guess)  {
-//     for(i = 0; i < this.letterArr.length; i++)  {
-//         var letter = this.letterArr[i];
-
-//         if(this.guess)  {
-//             console.log("Correct");
-//             this.correct++
-//         }
-//         letter.letterCheck(guess);
-//         this.showWord();
-// }
-// }
-// Word.prototype.showWord = function()  {
-//         for(i = 0; i < this.letterArr.length; i++)  {
-//             var display = this.letterArr[i]
-//             console.log(display.letterSwitch());
-//         }
-    
-// }
-// Word.prototype.checkWin = function()  {
-//     if(this.correct === this.letterArr.length)  {
-//         this.complete = true;
-//     }  else  {
-//         this.complete = false;
-//     }
-// }
-
-
+            
 module.exports = Word;
