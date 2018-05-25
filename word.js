@@ -5,8 +5,11 @@ var Word = function(chosenWord) {
     this.complete = false;
     this.newLetters = function()  {
         for(var i = 0; i < this.chosenWord.length; i++)  {
-            this.letterArr.push(new Letter(this.chosenWord[i]));
+            var ltrs = new Letter(this.chosenWord[i]);
+            ltrs.space();
+            this.letterArr.push(ltrs);
         }
+        
     }
     this.wordRender = function()  {
         var display = " ";

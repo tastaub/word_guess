@@ -1,3 +1,4 @@
+
 var Word = require("./word.js");
 var color = require("colors");
 var inquirer = require("inquirer");
@@ -5,10 +6,10 @@ var isLetter = require("is-letter");
 var selectWord = "";
 var newWord = "";
 
-var wordArr = "";
+// var wordArr = "";
 var wordBanks = {
     first: ["hello", "goodbye", "sleepy", "grumpy", "beef", "taco", "dorito"],
-    second: ["spanish", "italian", "french", "german", "russian", "english", "latin"],
+    second: ["spanish things", "italian things", "french things", "german things", "russian things", "english things", "latin things"],
     third: ["cold", "hot", "rain", "tornado", "hurricane", "cyclone", "flood", "snow"]
 }
 
@@ -20,22 +21,17 @@ var guessLetters = [];
 var guessesLeft = 10;
 
 
-function renderGame()  {
+function renderGame(key)  {
     
-    topicSelect();
-    console.log(topicSelect());
-    
-    // guessesLeft = 10;
-    // guessLetters = [];
+    // console.log(wordArr);
+    guessesLeft = 10;
+    guessLetters = [];
     // var key = wordBanks.wordBank
-    // selectWord = key[Math.floor(Math.random() * key.length)];
-    // newWord = new Word(selectWord);
-    // console.log(newWord);
-    // console.log(color.blue(`     
-    //     IT'S SOMETHING!!!!`));
-    // newWord.newLetters();
-    // newWord.wordRender();
-    // gameAsk();
+    selectWord = key[Math.floor(Math.random() * key.length)];
+    newWord = new Word(selectWord);
+    newWord.newLetters();
+    newWord.wordRender();
+    gameAsk();
 }
 
 function topicSelect()  {
@@ -45,12 +41,27 @@ function topicSelect()  {
             name: "size",
             message: "Pick something",
             choices: ["first", "second", "third"],
-            filter: function(val)  {
-                return val.toLowerCase();
-            }
         }
     ]).then(function(answer)  {
-        return answer.size;
+        if(answer.size === "first")  {
+            console.log(`
+            _______________
+            | /~~~~~~~~  ||||
+            ||          |...|
+            ||          |   |
+            |  ________/  O |
+             ~~~~~~~~~~~~~~~
+            `)
+            renderGame(wordBanks.first);
+            
+        } else if(answer.size === "second")  {
+            renderGame(wordBanks.second);
+            console.log(`
+            
+            `)
+        } else if(answer.size === "third")  {
+            renderGame(wordBanks.third);
+        }
     })
 }
 
@@ -74,16 +85,16 @@ function playAgain()  {
         `));
         return;
         }
-        renderGame();
+        topicSelect();
     })
 }
 
 
 function gameAsk()  {
-    console.log(`
+    console.log(color.blue(`
         Guessed Letters: ${guessLetters}
-        Guesses Left: ${guessesLeft}
-    `)    
+        Guesses Left: ${guessesLeft} 
+    `))    
         if(guessesLeft > 0 && newWord.complete === false)  {
             inquirer.prompt([
                 {
@@ -96,7 +107,7 @@ function gameAsk()  {
                         } else  {
                             return false;
                         }
-                    }
+                    },
                 }
             ]).then(function(answers)  {
                 var input = (answers.letter)

@@ -8,6 +8,11 @@ function Letter(letter)  {
 
         return " * "
     }
+    this.space = function()  {
+        if(this.letter === " ")  {
+            this.guess = true;
+        }
+    }
 }
 
 
