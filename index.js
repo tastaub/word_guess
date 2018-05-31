@@ -8,9 +8,9 @@ var newWord = "";
 
 // var wordArr = "";
 var wordBanks = {
-    first: ["hello", "goodbye", "sleepy", "grumpy", "beef", "taco", "dorito"],
-    second: ["spanish things", "italian things", "french things", "german things", "russian things", "english things", "latin things"],
-    third: ["cold", "hot", "rain", "tornado", "hurricane", "cyclone", "flood", "snow"]
+    first: ["kylo ren", "luke skywalker", "darth vader", "master yoda", "darth maul", "obi wan kenobi", "han solo"],
+    second: ["dwight schrute", "michael scott", "jim halpert", "pam beesly", "creed bratton", "kevin malone", "ryan howard", "kelly kapoor", "stanley hudson", "andy bernard"],
+    third: ["ned stark", "jon snow", "daenerys targaryen", "tyrion lannister", "cersei lannister", "jorah mormont", "petyr baelish", "jamie lannister", "brienne of tarth", "davos seaworth", "bran stark"] 
 }
 
 
@@ -40,27 +40,20 @@ function topicSelect()  {
             type: "list",
             name: "size",
             message: "Pick something",
-            choices: ["first", "second", "third"],
+            choices: ["Star Wars", "The Office", "Game of Thrones"],
         }
     ]).then(function(answer)  {
-        if(answer.size === "first")  {
-            console.log(`
-            _______________
-            | /~~~~~~~~  ||||
-            ||          |...|
-            ||          |   |
-            |  ________/  O |
-             ~~~~~~~~~~~~~~~
-            `)
+        if(answer.size === "Star Wars")  {
+            console.log("Star Wars")
             renderGame(wordBanks.first);
             
-        } else if(answer.size === "second")  {
-            renderGame(wordBanks.second);
-            console.log(`
-            
-            `)
-        } else if(answer.size === "third")  {
+        } else if(answer.size === "Game of Thrones")  {
+            console.log("Game of Thrones");
             renderGame(wordBanks.third);
+            
+        } else if(answer.size === "The Office")  {
+            console.log("The Office")
+            renderGame(wordBanks.second);
         }
     })
 }
@@ -121,25 +114,18 @@ function gameAsk()  {
                     guessLetters.push(input);
                     var found = newWord.checkGuess(input)
                     if(found === 0)  {
-                        console.log(color.red(`
-            YOUR GUESS WAS INCORRECT
-                        `));
+                        console.log(color.red(`YOUR GUESS WAS INCORRECT`));
                         newWord.wordRender();
                         guessesLeft--;
                     }  else  {
-                        console.log(color.green(`
-            YOUR GUESS WAS CORRECT
-                        `))
+                        console.log(color.green(`YOUR GUESS WAS CORRECT`))
                         newWord.wordRender();
                         newWord.checkComplete();
                     } 
                     gameAsk();  
                 } else  {
-                    console.log(color.red(`
-                    
-            YOU ALREADY GUESSED THAT LETTER
-                    
-                    `))
+                    console.log(color.red(`YOU ALREADY GUESSED THAT LETTER`))
+                    newWord.wordRender();
                     gameAsk();
                 }
 
